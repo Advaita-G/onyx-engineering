@@ -12,13 +12,10 @@ An agent can crash after taking an action but before recording the result. Repea
 
 Onyx records intent before execution. If a process stops with an unfinished intent, recovery marks that step as **unknown**, so the caller can check what happened before deciding how to proceed.
 
-```mermaid
-flowchart TD
-    Intent["Persist intent"] --> Execute["Execute action"]
-    Execute --> Finish["Record outcome"]
-    Intent --> Crash["Interrupted execution"]
-    Crash --> Recover["Recover as unknown"]
-    Recover --> Review["Review before resuming"]
+```text
+Intent recorded
+  -> action runs -> outcome recorded
+  -> interruption -> unknown -> review
 ```
 
 ## Technical decisions
